@@ -1,25 +1,29 @@
+import AvailableRides from "@/pages/dashboard/driver/availableRides";
+import DriverRideHistory from "@/pages/dashboard/driver/driverRideHistory";
+import DriverAvailability from "@/pages/dashboard/driver/updateAvailable";
+import CurrentRideStatus from "@/pages/dashboard/driver/updateRideStatus";
 import ContactPage from "@/pages/public/contact";
 import type { ISidebarItem } from "@/types";
-import { Car, DollarSignIcon, History, MapPin, Settings } from "lucide-react";
+import { Car, DollarSignIcon, History, MapPin, MapPinPlus } from "lucide-react";
 
 export const driverSidebarItems: ISidebarItem[] = [
   {
     name: "Go Online",
     href: "/driver-dashboard/online",
     icon: Car,
-    component: ContactPage,
+    component: DriverAvailability,
   },
   {
-    name: "Ride Requests",
-    href: "/driver-dashboard/requests",
+    name: "Available Rides",
+    href: "/driver-dashboard/available-rides",
     icon: MapPin,
-    component: ContactPage,
+    component: AvailableRides,
   },
   {
-    name: "Current Ride",
-    href: "/driver-dashboard/current",
-    icon: MapPin,
-    component: ContactPage,
+    name: "Ongoing Ride",
+    href: "/driver-dashboard/ongoing-ride",
+    icon: MapPinPlus,
+    component: CurrentRideStatus,
   },
   {
     name: "Earnings",
@@ -31,18 +35,18 @@ export const driverSidebarItems: ISidebarItem[] = [
     name: "Ride History",
     href: "/driver-dashboard/history",
     icon: History,
-    component: ContactPage,
+    component: DriverRideHistory,
   },
-  {
-    name: "Vehicle",
-    href: "/driver-dashboard/vehicle",
-    icon: Car,
-    component: ContactPage,
-  },
-  {
-    name: "Profile",
-    href: "/driver-dashboard/profile",
-    icon: Settings,
-    component: ContactPage,
-  },
+  // {
+  //   name: "Vehicle",
+  //   href: "/driver-dashboard/vehicle",
+  //   icon: Car,
+  //   component: ContactPage,
+  // },
+  // {
+  //   name: "Profile",
+  //   href: "/driver-dashboard/profile",
+  //   icon: Settings,
+  //   component: ContactPage,
+  // },
 ];

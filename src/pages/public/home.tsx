@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import heroImage from "@/assets/images/hero-ride-sharing.jpg";
 import { ArrowRight, Clock, Shield, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import RequestRide from "@/components/module/home/requestRide";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
                 for everyone.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in">
-                <Link to="/register">
+                <Link to="/rider-dashboard/book">
                   <Button
                     size="lg"
                     variant="outline"
@@ -31,7 +32,7 @@ export default function Home() {
                     Start Riding <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="/register?role=driver">
+                <Link to="/register">
                   <Button
                     size="lg"
                     className="bg-white text-primary rounded hover:bg-white/90"
@@ -77,6 +78,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ride booking Section */}
+      <RequestRide />
 
       {/* Features Section */}
       <section className="py-20">

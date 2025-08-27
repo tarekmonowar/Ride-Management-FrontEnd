@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Button } from "../ui/button";
 
@@ -10,7 +10,14 @@ const DashboardSidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { data } = useUserInfoQuery(undefined);
   const user = data?.data;
+  const [isAvailable, setIsAvailable] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    if (user?.isAvailable !== undefined) {
+      setIsAvailable(user.isAvailable);
+    }
+  }, [user]);
 
   // const navigationItems = getNavigationItems();
   const navigationItems = getSidebarItems(user.role);
@@ -67,8 +74,18 @@ const DashboardSidebar = () => {
           <div className="border-t p-4">
             <div className="text-sm font-medium mb-2">Driver Status</div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-success rounded-full"></div>
-              <span className="text-sm text-muted-foreground">Online</span>
+              <div
+                className={`w-4 h-4 rounded-full ${
+                  isAvailable ? "bg-green-700" : "bg-red-800"
+                }`}
+              ></div>
+              <span
+                className={`text-xl font-bold ${
+                  isAvailable ? "text-green-600" : "text-red-500"
+                }`}
+              >
+                {isAvailable ? "Online" : "Offline"}
+              </span>
             </div>
           </div>
         )}

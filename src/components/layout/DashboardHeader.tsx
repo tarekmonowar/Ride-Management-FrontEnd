@@ -1,13 +1,14 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   authApi,
   useLogoutMutation,
   useUserInfoQuery,
 } from "@/redux/features/auth/auth.api";
-import { Bell, Car, Home, LogOut, Settings, User } from "lucide-react";
+import { Bell, Car, Home, LogOut } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +17,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const DashboardHeader = () => {
   const [logout] = useLogoutMutation();
@@ -101,18 +101,18 @@ const DashboardHeader = () => {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Settings</span>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={handleLogout}
-                className="text-destructive"
+                className="text-destructive cursor-pointer"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>

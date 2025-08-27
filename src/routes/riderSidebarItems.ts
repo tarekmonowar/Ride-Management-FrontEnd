@@ -1,36 +1,38 @@
-import FeaturesPage from "@/pages/public/features";
+import ActiveRide from "@/pages/dashboard/Rider/activeRide";
+import BookRide from "@/pages/dashboard/Rider/bookRide";
+import RideHistory from "@/pages/dashboard/Rider/rideHistory";
 import type { ISidebarItem } from "@/types";
-import { Car, CreditCard, History, MapPin, Settings } from "lucide-react";
+import { Car, History, MapPin } from "lucide-react";
 
 export const riderSidebarItems: ISidebarItem[] = [
   {
     name: "Book Ride",
     href: "/rider-dashboard/book",
     icon: Car,
-    component: FeaturesPage,
+    component: BookRide,
   },
   {
-    name: "Current Ride",
-    href: "/rider-dashboard/current",
+    name: "Active Ride",
+    href: "/rider-dashboard/activeRide",
     icon: MapPin,
-    component: FeaturesPage,
+    component: ActiveRide,
   },
   {
     name: "Ride History",
     href: "/rider-dashboard/history",
     icon: History,
-    component: FeaturesPage,
+    component: RideHistory,
   },
-  {
-    name: "Payment",
-    href: "/rider-dashboard/payment",
-    icon: CreditCard,
-    component: FeaturesPage,
-  },
-  {
-    name: "Profile",
-    href: "/rider-dashboard/profile",
-    icon: Settings,
-    component: FeaturesPage,
-  },
+  // {
+  //   name: "Payment",
+  //   href: "/rider-dashboard/payment",
+  //   icon: CreditCard,
+  //   component: FeaturesPage,
+  // },
+  // {
+  //   name: "Profile",
+  //   href: "/rider-dashboard/profile",
+  //   icon: Settings,
+  //   component: FeaturesPage,
+  // },
 ];
