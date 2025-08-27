@@ -31,7 +31,7 @@ export default function ActiveRide() {
   const [cancelRide] = useCancelRideMutation();
   const [cancelReason, setCancelReason] = useState("");
 
-  if (!isLoading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center py-32 bg-[linear-gradient(135deg,rgba(0,102,153,0.1),rgba(230,204,0,0.1))] ">
         <Card className="w-full max-w-lg shadow-lg rounded-xl border border-gray-200 animate-pulse">
