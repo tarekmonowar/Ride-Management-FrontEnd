@@ -9,6 +9,38 @@ export interface IRideRequest {
   };
 }
 
+export interface IRide {
+  _id: string;
+  rider: string;
+  driver?: string;
+  pickupLocation: {
+    address: string;
+    lat: number;
+    lng: number;
+  };
+  destination: {
+    address: string;
+    lat: number;
+    lng: number;
+  };
+  status:
+    | "REQUESTED"
+    | "ACCEPTED"
+    | "PICKED_UP"
+    | "IN_TRANSIT"
+    | "COMPLETED"
+    | "CANCELLED";
+  estimatedCost: number;
+  distance: number;
+  requestedAt: string;
+  createdAt: string;
+  acceptedAt?: string;
+  pickedUpAt?: string;
+  completedAt?: string;
+  cancelledAt?: string;
+  cancellationReason?: string;
+}
+
 export interface CancelRidePayload {
   rideId: string;
   reason: string;

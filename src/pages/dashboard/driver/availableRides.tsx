@@ -8,9 +8,11 @@ import {
 } from "@/redux/features/driver/driver.api";
 import { Clock, DollarSign, MapPin, Navigation } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export default function AvailableRides() {
+  const navigate = useNavigate();
   const { data, isLoading, isError } = useAvailableRidesQuery(undefined);
   const rides = data?.data;
 
@@ -23,6 +25,7 @@ export default function AvailableRides() {
       await acceptRide(rideId).unwrap();
       toast.success("Ride accepted successfully");
       setLoadingRideId(null);
+      navigate("/driver-dashboard/ongoing-ride");
     } catch (err: any) {
       console.error(err);
       toast.error(

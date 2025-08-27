@@ -1,10 +1,10 @@
 import AvailableRides from "@/pages/dashboard/driver/availableRides";
 import DriverRideHistory from "@/pages/dashboard/driver/driverRideHistory";
 import DriverAvailability from "@/pages/dashboard/driver/updateAvailable";
-import CurrentRideStatus from "@/pages/dashboard/driver/updateRideStatus";
-import ContactPage from "@/pages/public/contact";
 import type { ISidebarItem } from "@/types";
 import { Car, DollarSignIcon, History, MapPin, MapPinPlus } from "lucide-react";
+import OnGoingRide from "@/pages/dashboard/driver/onGoingRide";
+import EarningsDetails from "@/pages/dashboard/driver/earningsDetails";
 
 export const driverSidebarItems: ISidebarItem[] = [
   {
@@ -23,13 +23,13 @@ export const driverSidebarItems: ISidebarItem[] = [
     name: "Ongoing Ride",
     href: "/driver-dashboard/ongoing-ride",
     icon: MapPinPlus,
-    component: CurrentRideStatus,
+    component: OnGoingRide,
   },
   {
     name: "Earnings",
     href: "/driver-dashboard/earnings",
     icon: DollarSignIcon,
-    component: ContactPage,
+    component: EarningsDetails,
   },
   {
     name: "Ride History",

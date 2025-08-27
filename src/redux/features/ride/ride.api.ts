@@ -24,7 +24,7 @@ export const rideApi = baseApi.injectEndpoints({
       { rideId: string; cancellationReason: string }
     >({
       query: ({ rideId, cancellationReason }) => ({
-        url: `ride/ride-cancel/${rideId}`,
+        url: `/ride/ride-cancel/${rideId}`,
         method: "PATCH",
         data: { cancellationReason },
       }),
@@ -32,14 +32,14 @@ export const rideApi = baseApi.injectEndpoints({
     }),
     rideHistory: builder.query({
       query: () => ({
-        url: "ride/rider-history",
+        url: "/ride/rider-history",
         method: "GET",
       }),
       providesTags: ["RIDE"],
     }),
     driverRideHistory: builder.query({
       query: () => ({
-        url: "ride/rider-history",
+        url: "/ride/rider-history",
         method: "GET",
       }),
       providesTags: ["RIDE"],

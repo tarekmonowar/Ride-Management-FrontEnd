@@ -1,5 +1,6 @@
 import { baseApi } from "@/redux/baseApi";
 import type { IResponse } from "@/types";
+import type { IDriverEarnings } from "@/types/driver.type";
 
 export const driverApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -47,6 +48,14 @@ export const driverApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["DRIVER", "RIDE"],
     }),
+
+    getDriverEarnings: builder.query<IResponse<IDriverEarnings>, void>({
+      query: () => ({
+        url: "/driver/earnings",
+        method: "GET",
+      }),
+      providesTags: ["DRIVER", "RIDE"],
+    }),
   }),
 });
 
@@ -56,4 +65,5 @@ export const {
   useAcceptRideMutation,
   useCurrentRideQuery,
   useUpdateStatusMutation,
+  useGetDriverEarningsQuery,
 } = driverApi;

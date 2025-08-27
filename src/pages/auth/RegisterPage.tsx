@@ -128,10 +128,25 @@ const RegisterPage = () => {
           result?.message || "Registration failed. Please try again.",
         );
       }
-    } catch (error: any) {
-      toast.error(
-        error?.data?.message || "Registration failed. Please try again.",
-      );
+    } catch (e: any) {
+      const errorData = e?.data;
+      let message = "Registration failed.";
+      if (errorData?.errorSource?.length > 0) {
+        const seen = new Set();
+        message = errorData.errorSource
+          .filter((e: any) => {
+            if (seen.has(e.path)) return false;
+            seen.add(e.path);
+            return true;
+          })
+          .map((e: any) => `${e.path}: ${e.message}`)
+          .join(", ");
+      } else if (errorData?.message) {
+        message = errorData.message;
+      } else if ((e.data as any)?.message) {
+        message = (e.data as any).message;
+      }
+      toast.error(message);
     }
   };
 
