@@ -5,6 +5,7 @@ import { useGetPaymentsHistoryQuery } from "@/redux/features/admin/admin.api";
 export default function AdminPaymentsDashboard() {
   const { data, isLoading, isError } = useGetPaymentsHistoryQuery();
   const result = data?.data;
+  console.log(result);
   if (isLoading) {
     return (
       <div className="p-6 space-y-6">
