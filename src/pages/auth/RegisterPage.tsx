@@ -69,6 +69,17 @@ const RegisterPage = () => {
       return;
     }
 
+    if (formData.name.length < 2 || formData.name.length > 15) {
+      toast.error("Name must be between 2 and 15 characters");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -81,13 +92,30 @@ const RegisterPage = () => {
 
     // Driver specific validation
     if (activeTab === "driver") {
-      if (
-        !formData.vehicleMake ||
-        !formData.vehicleModel ||
-        !formData.vehicleColor ||
-        !formData.plateNumber
-      ) {
+      const { vehicleMake, vehicleModel, vehicleColor, plateNumber } = formData;
+
+      if (!vehicleMake || !vehicleModel || !vehicleColor || !plateNumber) {
         toast.error("Please fill in all vehicle information");
+        return;
+      }
+
+      if (vehicleMake.length < 2 || vehicleMake.length > 20) {
+        toast.error("Vehicle Make must be between 2 and 20 characters");
+        return;
+      }
+
+      if (vehicleModel.length < 2 || vehicleModel.length > 20) {
+        toast.error("Vehicle Model must be between 2 and 20 characters");
+        return;
+      }
+
+      if (vehicleColor.length < 2 || vehicleColor.length > 20) {
+        toast.error("Vehicle Color must be between 2 and 20 characters");
+        return;
+      }
+
+      if (plateNumber.length < 5 || plateNumber.length > 10) {
+        toast.error("Plate Number must be between 5 and 10 characters");
         return;
       }
     }

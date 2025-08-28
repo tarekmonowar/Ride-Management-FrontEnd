@@ -2,9 +2,19 @@ import AvailableRides from "@/pages/dashboard/driver/availableRides";
 import DriverRideHistory from "@/pages/dashboard/driver/driverRideHistory";
 import DriverAvailability from "@/pages/dashboard/driver/updateAvailable";
 import type { ISidebarItem } from "@/types";
-import { Car, DollarSignIcon, History, MapPin, MapPinPlus } from "lucide-react";
+import {
+  AlertTriangle,
+  Car,
+  DollarSignIcon,
+  History,
+  MapPin,
+  MapPinPlus,
+  Settings,
+} from "lucide-react";
 import OnGoingRide from "@/pages/dashboard/driver/onGoingRide";
 import EarningsDetails from "@/pages/dashboard/driver/earningsDetails";
+import DriverProfileUpdate from "@/pages/dashboard/driver/driverProfile";
+import SosButton from "@/pages/dashboard/driver/EmergencySOS";
 
 export const driverSidebarItems: ISidebarItem[] = [
   {
@@ -37,16 +47,16 @@ export const driverSidebarItems: ISidebarItem[] = [
     icon: History,
     component: DriverRideHistory,
   },
-  // {
-  //   name: "Vehicle",
-  //   href: "/driver-dashboard/vehicle",
-  //   icon: Car,
-  //   component: ContactPage,
-  // },
-  // {
-  //   name: "Profile",
-  //   href: "/driver-dashboard/profile",
-  //   icon: Settings,
-  //   component: ContactPage,
-  // },
+  {
+    name: "Profile",
+    href: "/driver-dashboard/profile",
+    icon: Settings,
+    component: DriverProfileUpdate,
+  },
+  {
+    name: "Emergency SOS",
+    href: "/driver-dashboard/emergency-sos",
+    icon: AlertTriangle,
+    component: SosButton,
+  },
 ];

@@ -1,8 +1,10 @@
 import ActiveRide from "@/pages/dashboard/Rider/activeRide";
 import BookRide from "@/pages/dashboard/Rider/bookRide";
 import RideHistory from "@/pages/dashboard/Rider/rideHistory";
+import UserProfile from "@/pages/dashboard/Rider/userProfile";
 import type { ISidebarItem } from "@/types";
-import { Car, History, MapPin } from "lucide-react";
+import { AlertTriangle, Car, History, MapPin, Settings } from "lucide-react";
+import SosButton from "@/pages/dashboard/driver/EmergencySOS";
 
 export const riderSidebarItems: ISidebarItem[] = [
   {
@@ -23,6 +25,19 @@ export const riderSidebarItems: ISidebarItem[] = [
     icon: History,
     component: RideHistory,
   },
+  {
+    name: "Profile",
+    href: "/rider-dashboard/profile",
+    icon: Settings,
+    component: UserProfile,
+  },
+  {
+    name: "Emergency SOS",
+    href: "/rider-dashboard/emergency-sos",
+    icon: AlertTriangle,
+    component: SosButton,
+  },
+
   // {
   //   name: "Payment",
   //   href: "/rider-dashboard/payment",
@@ -30,9 +45,4 @@ export const riderSidebarItems: ISidebarItem[] = [
   //   component: FeaturesPage,
   // },
   // {
-  //   name: "Profile",
-  //   href: "/rider-dashboard/profile",
-  //   icon: Settings,
-  //   component: FeaturesPage,
-  // },
 ];

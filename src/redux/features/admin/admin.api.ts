@@ -42,6 +42,13 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["RIDE"],
     }),
+    getStatistics: builder.query({
+      query: () => ({
+        url: "/admin/statistics",
+        method: "GET",
+      }),
+      providesTags: ["RIDE", "USER"],
+    }),
   }),
 });
 
@@ -51,4 +58,5 @@ export const {
   useToggleBlockUserMutation,
   useAllRidesQuery,
   useGetPaymentsHistoryQuery,
+  useGetStatisticsQuery,
 } = adminApi;

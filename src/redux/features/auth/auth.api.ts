@@ -1,5 +1,6 @@
 import { baseApi } from "@/redux/baseApi";
 import type { IResponse, ISendOtp, IVerifyOtp } from "@/types";
+import type { TUpdateUser } from "@/types/auth.type";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -46,6 +47,29 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["USER"],
     }),
+
+    updateUser: builder.mutation<
+      IResponse<null>,
+      { userId: string; data: TUpdateUser }
+    >({
+      query: ({ userId, data }) => ({
+        url: `/user/${userId}`,
+        method: "PATCH",
+        data: data,
+      }),
+      invalidatesTags: ["USER"],
+    }),
+    changePassword: builder.mutation<
+      IResponse<null>,
+      { oldPassword: string; newPassword: string }
+    >({
+      query: ({ oldPassword, newPassword }) => ({
+        url: `/auth/change-password`,
+        method: "POST",
+        data: { oldPassword, newPassword },
+      }),
+      invalidatesTags: ["USER"],
+    }),
   }),
 });
 
@@ -56,4 +80,6 @@ export const {
   useSendOtpMutation,
   useVerifyOtpMutation,
   useUserInfoQuery,
+  useUpdateUserMutation,
+  useChangePasswordMutation,
 } = authApi;

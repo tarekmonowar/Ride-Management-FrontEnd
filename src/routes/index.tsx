@@ -17,6 +17,7 @@ import type { TRole } from "@/types";
 import { driverSidebarItems } from "./driverSidebarItems";
 import { riderSidebarItems } from "./riderSidebarItems";
 import UnAuthorized from "@/pages/public/unAuthorized";
+import ErrorPage from "@/pages/public/notFound";
 
 export const router = createBrowserRouter([
   {
@@ -87,5 +88,9 @@ export const router = createBrowserRouter([
   {
     Component: UnAuthorized,
     path: "/unauthorize",
+  },
+  {
+    path: "*",
+    Component: ErrorPage,
   },
 ]);

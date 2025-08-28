@@ -1,8 +1,8 @@
+import AdminStatistics from "@/pages/dashboard/admin/adminStatistics";
 import AllDrivers from "@/pages/dashboard/admin/allDrivers";
 import AllRides from "@/pages/dashboard/admin/allRides";
 import AllUsers from "@/pages/dashboard/admin/allUsers";
 import AdminPaymentsDashboard from "@/pages/dashboard/admin/paymentsHistory";
-import About from "@/pages/public/about";
 import type { ISidebarItem } from "@/types";
 import { BarChart3, Car, CreditCard, MapPin, Users } from "lucide-react";
 
@@ -11,7 +11,7 @@ export const adminSidebarItems: ISidebarItem[] = [
     name: "Analytics",
     href: "/admin-dashboard/analytics",
     icon: BarChart3,
-    component: About,
+    component: AdminStatistics,
   },
   {
     name: "All Users",
