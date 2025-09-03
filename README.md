@@ -132,14 +132,8 @@ local machine.
     npm install
     ```
 
-```
-
-
-
-
 ## Contact Information
 
 For any questions or support, reach out via email:
 
 **Email:** [tarekmonowar353@gmail.com](mailto:tarekmonowar353@gmail.com)
-```
