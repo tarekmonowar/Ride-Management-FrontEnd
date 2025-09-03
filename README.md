@@ -7,6 +7,14 @@ Node.js/Express backend API.
 
 ---
 
+# Live Link:
+
+https://tm-ride.vercel.app/
+
+# BackEnd Repository :
+
+https://github.com/tarekmonowar/Ride-Management-BackEnd.git
+
 ## 📋 Project Overview
 
 This project provides a complete and intuitive UI/UX for a ride booking system,
@@ -115,8 +123,7 @@ local machine.
 1.  **Clone the repository:**
 
     ```sh
-    git clone [Your-Frontend-Repo-URL]
-    cd [your-repo-name]
+    git clone https://github.com/tarekmonowar/Ride-Management-FrontEnd.git
     ```
 
 2.  **Install dependencies:**
@@ -125,16 +132,14 @@ local machine.
     npm install
     ```
 
-3.  **Configure environment variables:** Create a `.env` file in the root
-    directory and add your backend API URL.
-    ```env
-    REACT_APP_API_URL=[Your-Backend-API-URL]
-    ```
+```
 
-### Running the Application
 
-To start the development server:
 
-```sh
-npm start
+
+## Contact Information
+
+For any questions or support, reach out via email:
+
+**Email:** [tarekmonowar353@gmail.com](mailto:tarekmonowar353@gmail.com)
 ```
