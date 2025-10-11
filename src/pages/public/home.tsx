@@ -4,20 +4,21 @@ import heroImage from "@/assets/images/hero-ride-sharing.jpg";
 import { ArrowRight, Clock, Shield, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import RequestRide from "@/components/module/home/requestRide";
+import SixCards from "@/components/module/home/SixCards";
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
       <section className="relative py-20 bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%),_hsl(39_100%_60%))] overflow-hidden">
-        <div className="max-w-7xl px-[32px] mx-auto">
+        <div className="max-w-7xl px-4 mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
               <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
                 Your Perfect Ride,
                 <span className="block text-secondary">Just a Tap Away</span>
               </h1>
-              <p className="text-xl text-white/90 mb-8 animate-fade-in">
+              <p className="text-xl text-white/90 mb-10 xl:mb-12 animate-fade-in">
                 Experience the future of transportation with our comprehensive
                 ride management platform. Safe, reliable, and convenient rides
                 for everyone.
@@ -27,7 +28,7 @@ export default function Home() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="rounded  bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%))] text-white px-6 py-3 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 hover:text-white"
+                    className="rounded  text-md bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%))] text-white px-6 py-3 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 hover:text-white"
                   >
                     Start Riding <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
@@ -35,7 +36,7 @@ export default function Home() {
                 <Link to="/register">
                   <Button
                     size="lg"
-                    className="bg-white text-primary rounded hover:bg-white/90"
+                    className="bg-white text-black rounded text-md hover:bg-white/90 hover:scale-105 px-4"
                   >
                     Become a Driver
                   </Button>
@@ -55,16 +56,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Ride booking Section */}
+      <RequestRide />
+
       {/* Stats Section */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
+      <section className="py-16 bg-white ">
+        <div>
+          <img src="/rideimage.jpg" alt="" />
+        </div>
+        <div className="max-w-7xl mx-auto p-4 mt-5">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div className="animate-fade-in">
               <div className="text-4xl font-bold text-primary mb-2">10K+</div>
               <div className="text-muted-foreground">Happy Riders</div>
             </div>
             <div className="animate-fade-in">
-              <div className="text-4xl font-bold text-primary mb-2">5K+</div>
+              <div className="text-4xl font-bold text-primary mb-2">2K+</div>
               <div className="text-muted-foreground">Active Drivers</div>
             </div>
             <div className="animate-fade-in">
@@ -79,14 +86,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ride booking Section */}
-      <RequestRide />
+      {/* 6 card section */}
+      <SixCards />
 
       {/* Features Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-[rgba(0,102,153,0.1)]">
+        <div className="max-w-7xl  mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Why Choose RideManager?</h2>
+            <div className="h-[120px] w-[100px] mx-auto">
+              <img src="/panda2.png" alt="" />
+            </div>
+            <h2 className="text-4xl font-bold mb-4">Why Choose RidePanda?</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               We provide the most comprehensive and user-friendly ride
               management experience
@@ -94,7 +104,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300">
+            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300 rounded bg-white/50">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                   <Shield className="h-8 w-8 text-primary group-hover:text-white" />
@@ -107,7 +117,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300">
+            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300 bg-white/50 rounded">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary group-hover:text-white transition-all duration-300">
                   <Clock className="h-8 w-8 text-secondary group-hover:text-white" />
@@ -120,7 +130,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300">
+            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300  bg-white/50 rounded">
               <CardContent className="p-8">
                 <div className="w-16 h-16 bg-[hsl(142_71%_45%/_0.1)] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-[hsl(142_71%_45%)] group-hover:text-white transition-all duration-300">
                   <Star className="h-8 w-8 text-[hsl(142_71%_45%)] group-hover:text-white" />
@@ -140,7 +150,7 @@ export default function Home() {
 
       {/* How It Works */}
       <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">How It Works</h2>
             <p className="text-xl text-muted-foreground">
@@ -161,7 +171,7 @@ export default function Home() {
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl">
+              <div className="w-16 h-16 bg-fuchsia-700 rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-xl">
                 2
               </div>
               <h3 className="text-xl font-semibold mb-4">Get Matched</h3>

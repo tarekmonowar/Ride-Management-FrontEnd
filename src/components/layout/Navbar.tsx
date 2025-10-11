@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Car } from "lucide-react";
 import { Link } from "react-router";
+import { NavLink } from "react-router-dom";
+
 import { ModeToggle } from "./ModeToggler";
 import {
   authApi,
@@ -14,7 +15,7 @@ export default function Navbar() {
   const [logout] = useLogoutMutation();
   const { data } = useUserInfoQuery(undefined);
   const user = data?.data;
-  console.log(data);
+  // console.log(data);
   const handleLogout = async () => {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
@@ -22,46 +23,81 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border px-[32px]">
-      <div className="container  mx-auto px-4 py-2">
+      <div className="max-w-7xl mx-auto px-4 py-1">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Car className="h-10 w-10 text-primary" />
+            <img src="/panda.jpg" alt="panda" className="h-10 w-10" />
             <span className="text-3xl font-bold bg-clip-text text-transparent bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%))]">
-              RideManagement
+              RidePanda
             </span>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <Link
+            <NavLink
               to="/"
-              className="text-foreground hover:text-primary transition-colors text-lg"
+              className={({ isActive }: { isActive: boolean }) =>
+                `text-lg transition-colors ${
+                  isActive
+                    ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                    : "text-foreground hover:text-primary"
+                }`
+              }
             >
               Home
-            </Link>
-            <Link
+            </NavLink>
+
+            <NavLink
               to="/about"
-              className="text-foreground hover:text-primary transition-colors text-lg"
+              className={({ isActive }: { isActive: boolean }) =>
+                `text-lg transition-colors ${
+                  isActive
+                    ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                    : "text-foreground hover:text-primary"
+                }`
+              }
             >
               About
-            </Link>
-            <Link
+            </NavLink>
+
+            <NavLink
               to="/features"
-              className="text-foreground hover:text-primary transition-colors text-lg"
+              className={({ isActive }: { isActive: boolean }) =>
+                `text-lg transition-colors ${
+                  isActive
+                    ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                    : "text-foreground hover:text-primary"
+                }`
+              }
             >
               Features
-            </Link>
-            <Link
+            </NavLink>
+
+            <NavLink
               to="/contact"
-              className="text-foreground hover:text-primary transition-colors text-lg"
+              className={({ isActive }: { isActive: boolean }) =>
+                `text-lg transition-colors ${
+                  isActive
+                    ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                    : "text-foreground hover:text-primary"
+                }`
+              }
             >
               Contact
-            </Link>
-            <Link
+            </NavLink>
+
+            <NavLink
               to="/faq"
-              className="text-foreground hover:text-primary transition-colors text-lg"
+              className={({ isActive }: { isActive: boolean }) =>
+                `text-lg transition-colors ${
+                  isActive
+                    ? "text-primary font-semibold border-b-2 border-primary pb-1"
+                    : "text-foreground hover:text-primary"
+                }`
+              }
             >
               FAQ
-            </Link>
+            </NavLink>
+
             <ModeToggle />
           </div>
 

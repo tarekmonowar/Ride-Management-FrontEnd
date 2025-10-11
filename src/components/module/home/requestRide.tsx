@@ -1,30 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import config from "@/config";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { useRequestRideMutation } from "@/redux/features/ride/ride.api";
 import {
+  Autocomplete,
+  DirectionsRenderer,
   GoogleMap,
   Marker,
   useLoadScript,
-  Autocomplete,
 } from "@react-google-maps/api";
+import { Car, CircleCheckBig, Clock, Locate, MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Navigation, Clock, Car } from "lucide-react";
-import { toast } from "sonner";
-import config from "@/config";
-import { DirectionsRenderer } from "@react-google-maps/api";
-import { useRequestRideMutation } from "@/redux/features/ride/ride.api";
 import { useNavigate } from "react-router";
-import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 const containerStyle = {
   width: "100%",
-  height: "500px",
+  height: "100%",
 };
 
-const center = { lat: 23.8103, lng: 90.4125 }; // Default center (Dhaka)
+const center = { lat: 23.8103, lng: 90.4125 };
 
-// Keep libraries array outside component to prevent reloading
 const libraries: "places"[] = ["places"];
 
 interface Location {
@@ -62,7 +61,52 @@ export default function RequestRide() {
   const [destinationAddress, setDestinationAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  //for just calculate estimate time
+  //* for just date and time slot
+  const [date, setDate] = useState<string>(() => {
+    const d = new Date();
+    return d.toISOString().slice(0, 10);
+  });
+  const [time, setTime] = useState<string>("now");
+  const [timeOptions, setTimeOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    const generateOptions = () => {
+      const now = new Date();
+      const rounded = new Date(now);
+      // round up to next quarter
+      const mins = rounded.getMinutes();
+      const roundedMins = Math.ceil(mins / 15) * 15;
+      rounded.setMinutes(roundedMins);
+      rounded.setSeconds(0);
+      rounded.setMilliseconds(0);
+
+      const options: string[] = ["now"];
+      for (let i = 0; i < 6; i++) {
+        const slot = new Date(rounded.getTime() + i * 15 * 60 * 1000);
+        // Format time manually to always show 2-digit hour + AM/PM
+        let hours = slot.getHours();
+        const minutes = slot.getMinutes().toString().padStart(2, "0");
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12; // Convert 0-23 → 12-hour format
+        const formatted = `${hours
+          .toString()
+          .padStart(2, "0")}:${minutes} ${ampm}`;
+
+        options.push(formatted);
+      }
+
+      setTimeOptions(options);
+      if (!options.includes(time)) setTime("now");
+    };
+
+    generateOptions();
+
+    const id = setInterval(generateOptions, 60 * 1000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //*for just calculate estimate time
   useEffect(() => {
     if (!pickup || !destination) return;
 
@@ -155,34 +199,22 @@ export default function RequestRide() {
   }
 
   return (
-    <div className="p-4 inset-0  bg-[linear-gradient(135deg,rgba(0,102,153,0.1),rgba(230,204,0,0.1))]">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="text-center py-6">
-          <h1 className="bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%),_hsl(39_100%_60%))] bg-clip-text text-transparent font-bold text-3xl">
-            Request a Ride
-          </h1>
-
-          <p className="text-muted-foreground text-lg mt-3">
-            Choose your pickup and destination
-          </p>
-        </div>
-
+    <div className="p-4 pt-16 xl:pt-24 pb-16 inset-0  bg-[linear-gradient(135deg,rgba(0,102,153,0.1),rgba(230,204,0,0.1))]">
+      <div className="max-w-7xl px-4 mx-auto space-y-6">
         {/* Main Content */}
-        <div className="grid lg:grid-cols-5 gap-6 bg-gradient-hero">
+        <div className="grid lg:grid-cols-5 gap-6 py-6 bg-gradient-hero">
           {/* Control Panel */}
-          <Card className="lg:col-span-2 shadow-card border-ride-border">
+          <Card className="lg:col-span-2 shadow-sm pt-10 py-7 border-gray-400 rounded-none bg-transparent">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-ride-primary">
-                <Navigation className="h-5 w-5" />
-                Trip Details
+              <CardTitle className="flex items-center gap-2 text-4xl  ">
+                Go anywhere with Panda
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Pickup Location */}
               <div className="space-y-2">
                 <label className="text-sm font-medium flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-ride-success" />
+                  <MapPin className="h-5 w-5 text-primary" />
                   Pickup Location
                 </label>
                 <Autocomplete
@@ -194,7 +226,7 @@ export default function RequestRide() {
                     placeholder="Enter pickup location"
                     value={pickupAddress}
                     onChange={(e) => setPickupAddress(e.target.value)}
-                    className="bg-ride-surface border-ride-border focus:border-ride-primary transition-colors"
+                    className="bg-white/50 !border-none !text-lg rounded py-5 focus:border-ride-primary transition-colors"
                   />
                 </Autocomplete>
               </div>
@@ -202,7 +234,7 @@ export default function RequestRide() {
               {/* Destination */}
               <div className="space-y-2">
                 <label className="text-sm font-medium flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-ride-primary" />
+                  <Locate className="h-5 w-5 text-primary" />
                   Destination
                 </label>
                 <Autocomplete
@@ -214,23 +246,69 @@ export default function RequestRide() {
                     placeholder="Enter destination"
                     value={destinationAddress}
                     onChange={(e) => setDestinationAddress(e.target.value)}
-                    className="bg-ride-surface border-ride-border focus:border-ride-primary transition-colors"
+                    className="bg-white/50 !border-none !text-lg rounded py-5 focus:border-ride-primary transition-colors"
                   />
                 </Autocomplete>
               </div>
 
+              {/* Date & Time */}
+              <div className="grid grid-cols-2 gap-3 items-center">
+                <div className="space-y-3">
+                  <label className="text-md font-medium flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 text-primary"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <rect x="3" y="4" width="18" height="18" rx="2" />
+                      <path d="M16 2v4" />
+                      <path d="M8 2v4" />
+                    </svg>
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    className="w-full rounded border p-2 bg-white/50 !border-none"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    min={new Date().toISOString().split("T")[0]}
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-md font-medium flex items-center gap-2">
+                    <Clock className="h-5 w-5 text-primary" />
+                    Time
+                  </label>
+                  <select
+                    className="w-full rounded border p-2 bg-white/50 !border-none"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                  >
+                    {timeOptions.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt === "now" ? "Now" : opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               {/* Trip Info */}
               {destination && routeInfo && (
-                <Card className="bg-accent/50 border-accent">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                <Card className="bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%))] border-accent rounded py-3">
+                  <CardContent className="px-4">
+                    <div className="flex items-center gap-2 text-md text-white ">
                       <Clock className="h-4 w-4" />
                       Estimated Time
                     </div>
-                    <p className="text-lg font-semibold">
+                    <p className="text-xl font-semibold text-secondary">
                       {routeInfo.duration}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-md text-white">
                       Distance: {routeInfo.distance} (based on current traffic)
                     </p>
                   </CardContent>
@@ -240,16 +318,16 @@ export default function RequestRide() {
               {/* Confirm Button */}
               <Button
                 onClick={handleConfirmRide}
-                className="w-full bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%),_hsl(39_100%_60%))] hover:shadow-button transition-all duration-200 text-white font-semibold py-6 text-lg"
+                className="w-full rounded bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%),_hsl(39_100%_60%))] hover:shadow-button transition-all duration-200 text-white font-semibold py-6 text-lg"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
-                    <Car className="h-5 w-5 " />
+                    <CircleCheckBig className="!h-6 !w-6" />
                     Requesting Ride...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <Car className="h-5 w-5" />
+                    <CircleCheckBig className="!h-6 !w-6" />
                     Confirm Ride
                   </div>
                 )}
@@ -258,7 +336,7 @@ export default function RequestRide() {
           </Card>
 
           {/* Map */}
-          <Card className="lg:col-span-3 shadow-card border-ride-border overflow-hidden">
+          <Card className="lg:col-span-3 shadow-sm  border-gray-400 rounded-none bg-transparent ">
             <GoogleMap
               mapContainerStyle={containerStyle}
               center={pickup}
