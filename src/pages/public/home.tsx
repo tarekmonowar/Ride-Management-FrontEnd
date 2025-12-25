@@ -1,10 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router";
 import heroImage from "@/assets/images/hero-ride-sharing.jpg";
-import { ArrowRight, Clock, Shield, Star } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { AppDownloadSection } from "@/components/module/home/AppDownloadSections";
 import RequestRide from "@/components/module/home/requestRide";
 import SixCards from "@/components/module/home/SixCards";
+import CountUp from "@/components/module/home/StatsCard";
+import { WaveFlowSection } from "@/components/module/home/WaveFlowSection";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router";
 
 export default function Home() {
   return (
@@ -18,12 +21,81 @@ export default function Home() {
                 Your Perfect Ride,
                 <span className="block text-secondary">Just a Tap Away</span>
               </h1>
-              <p className="text-xl text-white/90 mb-10 xl:mb-12 animate-fade-in">
+              <p className="text-xl text-white/90 mb-10 xl:mb-10 animate-fade-in">
                 Experience the future of transportation with our comprehensive
                 ride management platform. Safe, reliable, and convenient rides
                 for everyone.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in">
+              <div className="relative">
+                <div className="absolute left-[15px] top-[30px] bottom-[30px] w-[2px] bg-gradient-to-b from-secondary via-[#5e0866] to-secondary"></div>
+
+                <div className="absolute left-[9px] top-[15px] w-[14px] h-[14px] rounded-full bg-secondary"></div>
+                <div className="absolute left-[9px] bottom-[15px] w-[14px] h-[14px] rounded-full bg-secondary"></div>
+
+                <div className="grid grid-cols-1 gap-6 pl-10 md:grid-cols-2">
+                  <Card className="border-none shadow-lg bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%)))] rounded-md pt-3">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold text-white drop-shadow-sm">
+                        Book Your Ride
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-purple-100 drop-shadow-sm -mt-2">
+                      <p>
+                        Enter pickup and destination on our intuitive map
+                        interface
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-none shadow-lg bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%)))] rounded-md  pt-3">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold text-white drop-shadow-sm">
+                        Get Matched
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-purple-100 drop-shadow-sm">
+                      <p>
+                        Our smart system finds the perfect driver for you
+                        instantly
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-none shadow-lg  bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%))] rounded-md  pt-3">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold text-white drop-shadow-sm">
+                        Track in Real-Time
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-purple-100 drop-shadow-sm">
+                      <p>Watch your driver arrive with live GPS ytacking</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-none shadow-lg  bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%)))] rounded-md  pt-3 ">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold text-white drop-shadow-sm">
+                        Enjoy Your journey
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-purple-100 drop-shadow-sm">
+                      <p>Relax and enjoy a safe ride to your destination</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col h-full justify-between">
+              <div className="relative animate-float">
+                <img
+                  src={heroImage}
+                  alt="Modern ride sharing interface"
+                  className="w-full  rounded-xl shadow-shadow-strong"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-xl"></div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in mt-24 mb-2">
                 <Link to="/rider-dashboard/book">
                   <Button
                     size="lg"
@@ -43,15 +115,6 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-
-            <div className="relative animate-float">
-              <img
-                src={heroImage}
-                alt="Modern ride sharing interface"
-                className="w-full h-auto rounded-xl shadow-shadow-strong"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-xl"></div>
-            </div>
           </div>
         </div>
       </section>
@@ -67,19 +130,29 @@ export default function Home() {
         <div className="max-w-7xl mx-auto p-4 mt-5">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div className="animate-fade-in">
-              <div className="text-4xl font-bold text-primary mb-2">10K+</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                <CountUp end={10000} suffix="+" />{" "}
+              </div>
               <div className="text-muted-foreground">Happy Riders</div>
             </div>
             <div className="animate-fade-in">
-              <div className="text-4xl font-bold text-primary mb-2">2K+</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                {" "}
+                <CountUp end={1200} suffix="+" />
+              </div>
               <div className="text-muted-foreground">Active Drivers</div>
             </div>
             <div className="animate-fade-in">
-              <div className="text-4xl font-bold text-primary mb-2">50+</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                <CountUp end={50} suffix="+" />
+              </div>
               <div className="text-muted-foreground">Cities</div>
             </div>
             <div className="animate-fade-in">
-              <div className="text-4xl font-bold text-primary mb-2">4.8★</div>
+              <div className="text-4xl font-bold text-primary mb-2">
+                {" "}
+                <CountUp end={4.8} decimals={1} />★
+              </div>
               <div className="text-muted-foreground">Average Rating</div>
             </div>
           </div>
@@ -91,62 +164,10 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="py-20 bg-[rgba(0,102,153,0.1)]">
-        <div className="max-w-7xl  mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="h-[120px] w-[100px] mx-auto">
-              <img src="/panda2.png" alt="" />
-            </div>
-            <h2 className="text-4xl font-bold mb-4">Why Choose RidePanda?</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              We provide the most comprehensive and user-friendly ride
-              management experience
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300 rounded bg-white/50">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                  <Shield className="h-8 w-8 text-primary group-hover:text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Safe & Secure</h3>
-                <p className="text-muted-foreground">
-                  Advanced safety features including real-time tracking, driver
-                  verification, and emergency SOS
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300 bg-white/50 rounded">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary group-hover:text-white transition-all duration-300">
-                  <Clock className="h-8 w-8 text-secondary group-hover:text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Quick & Reliable</h3>
-                <p className="text-muted-foreground">
-                  Get matched with nearby drivers instantly and enjoy
-                  consistent, on-time pickups
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="card-dashboard text-center group hover:scale-105 transition-all duration-300  bg-white/50 rounded">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-[hsl(142_71%_45%/_0.1)] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-[hsl(142_71%_45%)] group-hover:text-white transition-all duration-300">
-                  <Star className="h-8 w-8 text-[hsl(142_71%_45%)] group-hover:text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-4">
-                  Premium Experience
-                </h3>
-                <p className="text-muted-foreground">
-                  Enjoy comfortable rides with vetted drivers and excellent
-                  customer service
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        <WaveFlowSection />
       </section>
+
+      <AppDownloadSection />
 
       {/* How It Works */}
       <section className="py-20 bg-muted">

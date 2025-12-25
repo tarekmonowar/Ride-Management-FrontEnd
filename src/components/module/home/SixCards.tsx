@@ -1,3 +1,5 @@
+import AnimatedDoneButton from "@/utils/AnimatedtButton";
+
 export default function SixCards() {
   return (
     <section className="bg-slate-100">
@@ -15,9 +17,7 @@ export default function SixCards() {
                   Take company-approved trips with admin tracking and secure
                   payment by officials.
                 </p>
-                <button className="rounded text-sm text-black bg-gray-200 px-4 py-2 font-semibold transition-all duration-300 cursor-pointer hover:bg-white">
-                  Details
-                </button>
+                <AnimatedDoneButton />
               </div>
               <div>
                 <img
@@ -36,9 +36,7 @@ export default function SixCards() {
                 <p className="text-sm my-2 mb-5">
                   Go anywhere with Panda. Request ride, hop in, and go
                 </p>
-                <button className="rounded text-sm text-black bg-gray-200 px-4 py-2 font-semibold transition-all duration-300 cursor-pointer hover:bg-white">
-                  Details
-                </button>
+                <AnimatedDoneButton />
               </div>
               <div>
                 <img
@@ -57,9 +55,7 @@ export default function SixCards() {
                   Get convenient, affordable outstation cabs anytime at your
                   door.
                 </p>
-                <button className="rounded text-sm text-black bg-gray-200 px-4 py-2 font-semibold transition-all duration-300 cursor-pointer hover:bg-white">
-                  Details
-                </button>
+                <AnimatedDoneButton />
               </div>
               <div>
                 <img
@@ -77,9 +73,7 @@ export default function SixCards() {
                 <p className="text-sm my-2 mb-5">
                   Request a trip for a block of time and make multiple stops.
                 </p>
-                <button className="rounded text-sm text-black bg-gray-200 px-4 py-2 font-semibold transition-all duration-300 cursor-pointer hover:bg-white">
-                  Details
-                </button>
+                <AnimatedDoneButton />
               </div>
               <div>
                 <img
@@ -97,9 +91,7 @@ export default function SixCards() {
                 <p className="text-sm my-2 mb-5">
                   Get affordable rides in minutes at your doorstep.
                 </p>
-                <button className="rounded text-sm text-black bg-gray-200 px-4 py-2 font-semibold transition-all duration-300 cursor-pointer hover:bg-white">
-                  Details
-                </button>
+                <AnimatedDoneButton />
               </div>
               <div>
                 <img
@@ -119,9 +111,7 @@ export default function SixCards() {
                   Share your live location during trips. Admins monitor your
                   travel safely.
                 </p>
-                <button className="rounded text-sm text-black bg-gray-200 px-4 py-2 font-semibold transition-all duration-300 cursor-pointer hover:bg-white">
-                  Details
-                </button>
+                <AnimatedDoneButton />
               </div>
               <div>
                 <img
