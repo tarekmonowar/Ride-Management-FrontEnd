@@ -15,18 +15,22 @@ import {
 } from "@/redux/features/ride/ride.api";
 import {
   ArrowRight,
+  Bike,
+  Car,
   Clock,
+  CreditCard,
   DollarSign,
   MapPin,
   Navigation,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export default function ActiveRide() {
   const { data, isLoading, isError } = useActiveRideQuery(undefined);
   const ride = data?.data;
+  const navigate = useNavigate();
 
   const [cancelRide] = useCancelRideMutation();
   const [cancelReason, setCancelReason] = useState("");
@@ -105,14 +109,28 @@ export default function ActiveRide() {
                 ride.status === "PICKED_UP"
                   ? "bg-yellow-500"
                   : ride.status === "IN_TRANSIT"
-                  ? "bg-blue-500"
-                  : ride.status === "ACCEPTED"
-                  ? "bg-green-500"
-                  : "bg-gray-500"
+                    ? "bg-blue-500"
+                    : ride.status === "ACCEPTED"
+                      ? "bg-green-500"
+                      : "bg-gray-500"
               } text-white px-3 py-1 rounded-lg`}
             >
               {ride.status}
             </Badge>
+            {ride.vehicleType && (
+              <Badge
+                className={`${
+                  ride.vehicleType === "bike" ? "bg-purple-500" : "bg-indigo-500"
+                } text-white px-3 py-1 rounded-lg flex items-center gap-1`}
+              >
+                {ride.vehicleType === "bike" ? (
+                  <Bike className="w-3 h-3" />
+                ) : (
+                  <Car className="w-3 h-3" />
+                )}
+                {ride.vehicleType === "bike" ? "Bike" : "Car"}
+              </Badge>
+            )}
           </CardHeader>
 
           <CardContent className="space-y-4 text-gray-700">
@@ -187,6 +205,30 @@ export default function ActiveRide() {
               Distance: <span className="font-medium">{ride.distance} km</span>
             </p>
 
+            {/* Payment Section - show when ride is COMPLETED and payment pending */}
+            {ride.status === "COMPLETED" && ride.paymentStatus === "pending" && (
+              <div className="border border-green-200 bg-green-50 rounded-lg p-4 space-y-2">
+                <p className="text-green-700 font-semibold text-lg">Ride Completed!</p>
+                <p className="text-gray-600 text-sm">Please proceed to pay for your ride.</p>
+                <Button
+                  onClick={() => navigate(`/rider-dashboard/payment?rideId=${ride._id}`)}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg"
+                >
+                  <CreditCard className="mr-2 h-5 w-5" />
+                  Proceed to Payment — ${ride.estimatedCost?.toFixed(2)}
+                </Button>
+              </div>
+            )}
+            {ride.status === "COMPLETED" && ride.paymentStatus === "paid" && (
+              <div className="border border-blue-200 bg-blue-50 rounded-lg p-3 text-center text-blue-700 font-semibold">
+                Payment submitted — awaiting driver confirmation
+              </div>
+            )}
+            {ride.status === "COMPLETED" && ride.paymentStatus === "driver_confirmed" && (
+              <div className="border border-green-200 bg-green-50 rounded-lg p-3 text-center text-green-700 font-semibold">
+                ✓ Payment confirmed by driver
+              </div>
+            )}
             <div className="flex flex-col gap-3">
               <textarea
                 className="w-full p-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"

@@ -49,6 +49,36 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["RIDE", "USER"],
     }),
+    reviewDriver: builder.mutation({
+      query: ({
+        driverId,
+        action,
+        reason,
+      }: {
+        driverId: string;
+        action: string;
+        reason?: string;
+      }) => ({
+        url: `/admin/review-driver/${driverId}`,
+        method: "PATCH",
+        data: { action, reason },
+      }),
+      invalidatesTags: ["USER"],
+    }),
+    getSettlements: builder.query({
+      query: () => ({
+        url: "/admin/settlements",
+        method: "GET",
+      }),
+      providesTags: ["ADMIN"],
+    }),
+    settleDriver: builder.mutation({
+      query: (driverId: string) => ({
+        url: `/admin/settle/${driverId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["ADMIN"],
+    }),
   }),
 });
 
@@ -59,4 +89,7 @@ export const {
   useAllRidesQuery,
   useGetPaymentsHistoryQuery,
   useGetStatisticsQuery,
+  useReviewDriverMutation,
+  useGetSettlementsQuery,
+  useSettleDriverMutation,
 } = adminApi;

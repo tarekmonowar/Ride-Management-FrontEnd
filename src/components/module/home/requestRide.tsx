@@ -12,7 +12,7 @@ import {
   Marker,
   useLoadScript,
 } from "@react-google-maps/api";
-import { Car, CircleCheckBig, Clock, Locate, MapPin } from "lucide-react";
+import { Car, Bike, CircleCheckBig, Clock, Locate, MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -60,6 +60,7 @@ export default function RequestRide() {
   const [pickupAddress, setPickupAddress] = useState("");
   const [destinationAddress, setDestinationAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [vehicleType, setVehicleType] = useState<"bike" | "car">("car");
 
   //* for just date and time slot
   const [date, setDate] = useState<string>(() => {
@@ -170,6 +171,7 @@ export default function RequestRide() {
       const rideData = {
         pickupLocation: pickup,
         destination: destination,
+        vehicleType,
       };
       const response = await requestRide(rideData).unwrap();
 
@@ -314,6 +316,37 @@ export default function RequestRide() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* Vehicle Type Selector */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Vehicle Type</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setVehicleType("bike")}
+                    className={`flex items-center justify-center gap-2 p-3 rounded-lg border-2 transition-all duration-200 ${
+                      vehicleType === "bike"
+                        ? "border-[hsl(195,100%,39%)] bg-[hsl(195,100%,39%)]/10 text-[hsl(195,100%,39%)] font-semibold"
+                        : "border-gray-200 bg-white/50 text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    <Bike className="h-5 w-5" />
+                    Bike
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setVehicleType("car")}
+                    className={`flex items-center justify-center gap-2 p-3 rounded-lg border-2 transition-all duration-200 ${
+                      vehicleType === "car"
+                        ? "border-[hsl(195,100%,39%)] bg-[hsl(195,100%,39%)]/10 text-[hsl(195,100%,39%)] font-semibold"
+                        : "border-gray-200 bg-white/50 text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    <Car className="h-5 w-5" />
+                    Car
+                  </button>
+                </div>
+              </div>
 
               {/* Confirm Button */}
               <Button

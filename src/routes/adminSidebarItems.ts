@@ -3,8 +3,16 @@ import AllDrivers from "@/pages/dashboard/admin/allDrivers";
 import AllRides from "@/pages/dashboard/admin/allRides";
 import AllUsers from "@/pages/dashboard/admin/allUsers";
 import AdminPaymentsDashboard from "@/pages/dashboard/admin/paymentsHistory";
+import Settlements from "@/pages/dashboard/admin/settlements";
 import type { ISidebarItem } from "@/types";
-import { BarChart3, Car, CreditCard, MapPin, Users } from "lucide-react";
+import {
+  BarChart3,
+  Car,
+  CreditCard,
+  Landmark,
+  MapPin,
+  Users,
+} from "lucide-react";
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
@@ -37,16 +45,10 @@ export const adminSidebarItems: ISidebarItem[] = [
     icon: CreditCard,
     component: AdminPaymentsDashboard,
   },
-  // {
-  //   name: "Safety",
-  //   href: "/admin-dashboard/safety",
-  //   icon: Shield,
-  //   component: About,
-  // },
-  // {
-  //   name: "Settings",
-  //   href: "/admin-dashboard/settings",
-  //   icon: Settings,
-  //   component: About,
-  // },
+  {
+    name: "Settlements",
+    href: "/admin-dashboard/settlements",
+    icon: Landmark,
+    component: Settlements,
+  },
 ];

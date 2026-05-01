@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
-import { Car, Eye, EyeOff, Loader2 } from "lucide-react";
+import { Car, Eye, EyeOff, Home, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -74,6 +74,19 @@ const LoginPage = () => {
       console.log(result);
 
       if (result.data?.user) {
+        const u = result.data.user;
+        if (u.role === "DRIVER" && u.applicationStatus === "pending") {
+          toast.info(
+            "Your driver application is under review. Please wait for admin approval.",
+          );
+          return;
+        }
+        if (u.role === "DRIVER" && u.applicationStatus === "rejected") {
+          toast.error(
+            `Your driver application was rejected. Reason: ${u.rejectionReason || "Not specified"}`,
+          );
+          return;
+        }
         toast.success(`Welcome back, ${result.data.user.name}!`);
         const from =
           location.state?.from?.pathname ||
@@ -122,6 +135,19 @@ const LoginPage = () => {
           <Link to="/" className="inline-flex items-center space-x-2">
             <Car className="h-10 w-10 text-white" />
             <span className="text-3xl font-bold text-white">RideManager</span>
+          </Link>
+        </div>
+
+        {/* Back to Home */}
+        <div className="text-center mb-4">
+          <Link to="/">
+            <Button
+              variant="outline"
+              className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white px-6 py-2 font-medium transition-all duration-300 hover:scale-105"
+            >
+              <Home className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
           </Link>
         </div>
 

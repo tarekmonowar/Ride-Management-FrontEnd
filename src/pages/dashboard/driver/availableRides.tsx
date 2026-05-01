@@ -6,7 +6,7 @@ import {
   useAcceptRideMutation,
   useAvailableRidesQuery,
 } from "@/redux/features/driver/driver.api";
-import { Clock, DollarSign, MapPin, Navigation } from "lucide-react";
+import { Bike, Car, Clock, DollarSign, MapPin, Navigation } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -86,13 +86,25 @@ export default function AvailableRides() {
                 ride.status === "REQUESTED"
                   ? "bg-blue-500"
                   : ride.status === "CANCELLED"
-                  ? "bg-red-500"
-                  : ride.status === "COMPLETED"
-                  ? "bg-green-500"
-                  : "bg-gray-500"
+                    ? "bg-red-500"
+                    : ride.status === "COMPLETED"
+                      ? "bg-green-500"
+                      : "bg-gray-500"
               } text-white px-3 py-1 rounded-lg`}
             >
               {ride.status}
+            </Badge>
+            <Badge
+              className={`${
+                ride.vehicleType === "bike" ? "bg-purple-500" : "bg-indigo-500"
+              } text-white px-3 py-1 rounded-lg flex items-center gap-1`}
+            >
+              {ride.vehicleType === "bike" ? (
+                <Bike className="w-3 h-3" />
+              ) : (
+                <Car className="w-3 h-3" />
+              )}
+              {ride.vehicleType === "bike" ? "Bike" : "Car"}
             </Badge>
           </CardHeader>
 

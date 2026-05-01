@@ -51,6 +51,38 @@ export default function AdminPaymentsDashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Payment Method Breakdown */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+        <Card className="shadow-md border border-green-200 rounded-2xl bg-green-50">
+          <CardHeader>
+            <CardTitle className="text-green-700">Cash Payments</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold text-green-600">
+              ${(result?.cashTotal ?? 0).toFixed(2)}
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              Total collected via cash
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-md border border-blue-200 rounded-2xl bg-blue-50">
+          <CardHeader>
+            <CardTitle className="text-blue-700">Stripe Payments</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold text-blue-600">
+              ${(result?.stripeTotal ?? 0).toFixed(2)}
+            </p>
+            <p className="text-sm text-gray-500 mt-1">
+              Total collected via Stripe card
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         {Object.entries(result?.ridesByStatus || {}).map(([status, info]) => (
           <Card

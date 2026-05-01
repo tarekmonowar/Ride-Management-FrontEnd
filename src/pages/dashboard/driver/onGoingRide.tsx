@@ -13,6 +13,7 @@ import {
   useCurrentRideQuery,
   useUpdateStatusMutation,
 } from "@/redux/features/driver/driver.api";
+import { useDriverConfirmPaymentMutation } from "@/redux/features/payment/payment.api";
 import { RideStatus, type RideStatusType } from "@/types/ride.type";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -27,6 +28,16 @@ export default function OnGoingRide() {
   );
   const [cancellationReason, setCancellationReason] = useState("");
   const [updateStatus, { isLoading: isUpdating }] = useUpdateStatusMutation();
+  const [driverConfirmPayment, { isLoading: isConfirming }] = useDriverConfirmPaymentMutation();
+
+  const handleConfirmPayment = async () => {
+    try {
+      await driverConfirmPayment(ride._id).unwrap();
+      toast.success("Payment confirmed successfully!");
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to confirm payment");
+    }
+  };
 
   useEffect(() => {
     if (ride?.status) {
@@ -105,14 +116,14 @@ export default function OnGoingRide() {
                 ride.status === "COMPLETED"
                   ? "bg-green-500"
                   : ride.status === "CANCELLED"
-                  ? "bg-red-500"
-                  : ride.status === "ACCEPTED"
-                  ? "bg-blue-500"
-                  : ride.status === "PICKED_UP"
-                  ? "bg-fuchsia-700"
-                  : ride.status === "IN_TRANSIT"
-                  ? "bg-amber-700"
-                  : "bg-gray-500"
+                    ? "bg-red-500"
+                    : ride.status === "ACCEPTED"
+                      ? "bg-blue-500"
+                      : ride.status === "PICKED_UP"
+                        ? "bg-fuchsia-700"
+                        : ride.status === "IN_TRANSIT"
+                          ? "bg-amber-700"
+                          : "bg-gray-500"
               } text-white px-3 py-1 rounded-lg`}
             >
               {ride.status}
@@ -204,6 +215,41 @@ export default function OnGoingRide() {
         >
           {isUpdating ? "Updating..." : "Update Status"}
         </Button>
+
+        {/* Payment Confirmation Section */}
+        {ride.status === "COMPLETED" && (
+          <div className="border-t pt-4 mt-2 space-y-3">
+            <h2 className="text-blue-700 font-bold">Payment Info :</h2>
+            <div className="flex items-center gap-2">
+              <span className="font-medium">Method:</span>
+              <Badge className={ride.paymentMethod === "stripe" ? "bg-blue-500 text-white" : ride.paymentMethod === "cash" ? "bg-green-500 text-white" : "bg-gray-400 text-white"}>
+                {ride.paymentMethod || "Not paid yet"}
+              </Badge>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-medium">Status:</span>
+              <Badge className={
+                ride.paymentStatus === "driver_confirmed" ? "bg-green-600 text-white" :
+                ride.paymentStatus === "paid" ? "bg-yellow-500 text-white" : "bg-gray-400 text-white"
+              }>
+                {ride.paymentStatus === "driver_confirmed" ? "Confirmed" :
+                 ride.paymentStatus === "paid" ? "Paid — needs confirmation" : "Pending"}
+              </Badge>
+            </div>
+            {ride.paymentStatus === "paid" && (
+              <Button
+                onClick={handleConfirmPayment}
+                disabled={isConfirming}
+                className="w-full bg-green-600 text-white hover:bg-green-700 font-semibold"
+              >
+                {isConfirming ? "Confirming..." : "✓ Confirm Payment Received"}
+              </Button>
+            )}
+            {ride.paymentStatus === "driver_confirmed" && (
+              <p className="text-green-600 font-semibold text-center">✓ Payment confirmed!</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

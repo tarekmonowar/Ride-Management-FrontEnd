@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChevronDown, ChevronUp, Search } from "lucide-react";
+import { ChevronDown, ChevronUp, HelpCircle, MessageSquare, Search, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 
@@ -22,7 +21,7 @@ const FAQPage = () => {
         id: "r1",
         question: "How do I book a ride?",
         answer:
-          "Simply open the RideManager app, enter your pickup location and destination, choose your preferred ride type, and confirm your booking. You'll be matched with a nearby driver within minutes.",
+          "Simply open the RidePanda app, enter your pickup location and destination, choose your preferred ride type, and confirm your booking. You'll be matched with a nearby driver within minutes.",
       },
       {
         id: "r2",
@@ -98,7 +97,7 @@ const FAQPage = () => {
         id: "b1",
         question: "Do you offer business accounts?",
         answer:
-          "Yes, we offer RideManager for Business with features like centralized billing, ride management, expense reporting, and dedicated support for companies.",
+          "Yes, we offer RidePanda for Business with features like centralized billing, ride management, expense reporting, and dedicated support for companies.",
       },
       {
         id: "b2",
@@ -140,128 +139,162 @@ const FAQPage = () => {
     const isExpanded = expandedItems.includes(faq.id);
 
     return (
-      <Card className="card-dashboard">
-        <CardContent className="p-0">
-          <button
-            onClick={() => toggleExpanded(faq.id)}
-            className="w-full p-6 text-left flex items-center justify-between hover:bg-muted/50 transition-colors"
-          >
-            <h3 className="font-semibold">{faq.question}</h3>
+      <div
+        className={`premium-card rounded-xl bg-card border transition-all duration-300 ${
+          isExpanded ? "border-primary/20 shadow-md" : "border-border"
+        }`}
+        id={`faq-item-${faq.id}`}
+      >
+        <button
+          onClick={() => toggleExpanded(faq.id)}
+          className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-muted/30 transition-colors rounded-xl"
+        >
+          <h3 className="font-medium text-sm">{faq.question}</h3>
+          <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${isExpanded ? "bg-primary/10" : "bg-muted"}`}>
             {isExpanded ? (
-              <ChevronUp className="h-5 w-5 text-muted-foreground" />
+              <ChevronUp className="h-4 w-4 text-primary" />
             ) : (
-              <ChevronDown className="h-5 w-5 text-muted-foreground" />
+              <ChevronDown className="h-4 w-4 text-muted-foreground" />
             )}
-          </button>
-          {isExpanded && (
-            <div className="px-6 pb-6">
-              <p className="text-muted-foreground">{faq.answer}</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+          </div>
+        </button>
+        <div
+          className={`overflow-hidden transition-all duration-300 ${
+            isExpanded ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="px-5 pb-5">
+            <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+          </div>
+        </div>
+      </div>
     );
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="py-20 bg-[linear-gradient(135deg,_hsl(195_100%_39%),_hsl(195_100%_25%),_hsl(39_100%_60%))]">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-white mb-6">
-            Frequently Asked Questions
+      {/* ─── Hero ─── */}
+      <section className="relative py-28 hero-gradient overflow-hidden" id="faq-hero">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 right-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-60 h-60 bg-secondary/5 rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <span className="badge-startup mb-6 inline-flex !bg-white/10 !border-white/15 !text-white/80">
+            <HelpCircle className="h-3.5 w-3.5" />
+            Help Center
+          </span>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Frequently asked{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-secondary bg-clip-text text-transparent">
+              questions
+            </span>
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            Find answers to common questions about using RideManager as a rider,
+          <p className="text-lg text-white/50 max-w-2xl mx-auto mb-8">
+            Find answers to common questions about using RidePanda as a rider,
             driver, or business partner.
           </p>
 
           {/* Search */}
           <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search questions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white"
+              className="pl-11 bg-white/95 border-0 h-12 rounded-xl shadow-lg text-sm"
+              id="faq-search"
             />
           </div>
         </div>
       </section>
 
-      {/* FAQ Content */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
+      {/* ─── FAQ Content ─── */}
+      <section className="py-24" id="faq-content">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="riders" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 max-w-md mx-auto mb-12">
-              <TabsTrigger value="riders" id="rider">
+            <TabsList className="grid w-full grid-cols-3 max-w-lg mx-auto mb-14 h-12 bg-muted/50 rounded-xl p-1">
+              <TabsTrigger
+                value="riders"
+                id="rider"
+                className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm text-sm font-medium"
+              >
                 For Riders
               </TabsTrigger>
-              <TabsTrigger value="drivers" id="driver">
+              <TabsTrigger
+                value="drivers"
+                id="driver"
+                className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm text-sm font-medium"
+              >
                 For Drivers
               </TabsTrigger>
-              <TabsTrigger value="business" id="business">
+              <TabsTrigger
+                value="business"
+                id="business"
+                className="rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm text-sm font-medium"
+              >
                 For Business
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="riders">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-8">
-                  Rider FAQ
-                </h2>
-                <div className="space-y-4">
-                  {filterFAQs(faqData.riders).map((faq) => (
-                    <FAQItem key={faq.id} faq={faq} />
-                  ))}
-                </div>
+              <div className="space-y-3">
+                {filterFAQs(faqData.riders).map((faq) => (
+                  <FAQItem key={faq.id} faq={faq} />
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="drivers">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-8">
-                  Driver FAQ
-                </h2>
-                <div className="space-y-4">
-                  {filterFAQs(faqData.drivers).map((faq) => (
-                    <FAQItem key={faq.id} faq={faq} />
-                  ))}
-                </div>
+              <div className="space-y-3">
+                {filterFAQs(faqData.drivers).map((faq) => (
+                  <FAQItem key={faq.id} faq={faq} />
+                ))}
               </div>
             </TabsContent>
 
             <TabsContent value="business">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-8">
-                  Business FAQ
-                </h2>
-                <div className="space-y-4">
-                  {filterFAQs(faqData.business).map((faq) => (
-                    <FAQItem key={faq.id} faq={faq} />
-                  ))}
-                </div>
+              <div className="space-y-3">
+                {filterFAQs(faqData.business).map((faq) => (
+                  <FAQItem key={faq.id} faq={faq} />
+                ))}
               </div>
             </TabsContent>
           </Tabs>
         </div>
       </section>
 
-      {/* Still Have Questions */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Still Have Questions?</h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Can't find the answer you're looking for? Our support team is here
-            to help you with any questions or concerns.
+      {/* ─── Still Have Questions ─── */}
+      <section className="py-24 bg-muted/30 dot-pattern" id="faq-contact-cta">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <span className="badge-startup mb-4 inline-flex">
+            <Sparkles className="h-3.5 w-3.5" />
+            Need more help?
+          </span>
+          <h2 className="text-3xl font-bold mb-4">
+            Still have <span className="gradient-text">questions</span>?
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Can't find the answer you're looking for? Our support team is
+            available 24/7 to help you with any questions or concerns.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
-              <Button size="lg" className="btn-hero">
+              <Button
+                size="lg"
+                className="rounded-xl bg-gradient-to-r from-primary to-cyan-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 px-8 h-12"
+                id="faq-contact-btn"
+              >
+                <MessageSquare className="mr-2 h-4 w-4" />
                 Contact Support
               </Button>
             </Link>
-            <Button size="lg" variant="outline">
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-xl font-medium px-8 h-12"
+              id="faq-chat-btn"
+            >
               Live Chat
             </Button>
           </div>

@@ -6,6 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useRideHistoryQuery } from "@/redux/features/ride/ride.api";
 import {
   ArrowRight,
+  Bike,
+  Car,
   Clock,
   DollarSign,
   MapPin,
@@ -69,21 +71,63 @@ export default function RideHistory() {
             key={ride._id}
             className="shadow-lg rounded-xl border border-gray-200 px-5"
           >
-            <CardHeader className="flex flex-row justify-between items-center">
+            <CardHeader className="flex flex-row justify-between items-center flex-wrap gap-2">
               <CardTitle className="text-lg font-semibold">
                 Ride Details
               </CardTitle>
-              <Badge
-                className={`${
-                  ride.status === "COMPLETED"
-                    ? "bg-green-500"
-                    : ride.status === "CANCELLED"
-                    ? "bg-red-500"
-                    : "bg-gray-500"
-                } text-white px-3 py-1 rounded-lg`}
-              >
-                {ride.status}
-              </Badge>
+              <div className="flex items-center gap-2 flex-wrap">
+                <Badge
+                  className={`${
+                    ride.status === "COMPLETED"
+                      ? "bg-green-500"
+                      : ride.status === "CANCELLED"
+                        ? "bg-red-500"
+                        : "bg-gray-500"
+                  } text-white px-3 py-1 rounded-lg`}
+                >
+                  {ride.status}
+                </Badge>
+                {ride.vehicleType && (
+                  <Badge
+                    className={`${
+                      ride.vehicleType === "bike"
+                        ? "bg-purple-500"
+                        : "bg-indigo-500"
+                    } text-white px-3 py-1 rounded-lg flex items-center gap-1`}
+                  >
+                    {ride.vehicleType === "bike" ? (
+                      <Bike className="w-3 h-3" />
+                    ) : (
+                      <Car className="w-3 h-3" />
+                    )}
+                    {ride.vehicleType}
+                  </Badge>
+                )}
+                {ride.paymentMethod && (
+                  <Badge
+                    className={`${
+                      ride.paymentMethod === "stripe"
+                        ? "bg-blue-500"
+                        : "bg-green-600"
+                    } text-white px-3 py-1 rounded-lg`}
+                  >
+                    {ride.paymentMethod === "stripe" ? "Stripe" : "Cash"}
+                  </Badge>
+                )}
+                {ride.paymentStatus && ride.paymentStatus !== "pending" && (
+                  <Badge
+                    className={`${
+                      ride.paymentStatus === "driver_confirmed"
+                        ? "bg-green-700"
+                        : "bg-yellow-500"
+                    } text-white px-3 py-1 rounded-lg`}
+                  >
+                    {ride.paymentStatus === "driver_confirmed"
+                      ? "Paid ✓"
+                      : "Paid"}
+                  </Badge>
+                )}
+              </div>
             </CardHeader>
 
             <CardContent className="space-y-3 text-gray-700">

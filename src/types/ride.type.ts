@@ -7,6 +7,7 @@ export interface IRideRequest {
     lat: number;
     lng: number;
   };
+  vehicleType: "bike" | "car";
 }
 
 export interface IRide {
@@ -32,6 +33,11 @@ export interface IRide {
     | "CANCELLED";
   estimatedCost: number;
   distance: number;
+  vehicleType?: "bike" | "car";
+  paymentMethod?: "stripe" | "cash";
+  paymentStatus?: "pending" | "paid" | "driver_confirmed";
+  stripePaymentId?: string;
+  isSettled?: boolean;
   requestedAt: string;
   createdAt: string;
   acceptedAt?: string;
