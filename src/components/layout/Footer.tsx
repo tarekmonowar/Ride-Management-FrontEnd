@@ -3,10 +3,18 @@ import { Link } from "react-router";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-background to-muted border-t border-border" id="site-footer">
+    <footer
+      className="relative bg-gradient-to-b from-background to-muted border-t border-border"
+      id="site-footer"
+    >
       {/* Top wave decoration */}
       <div className="absolute top-0 left-0 right-0 overflow-hidden -translate-y-px">
-        <svg viewBox="0 0 1200 40" className="w-full h-8 text-background" fill="currentColor" preserveAspectRatio="none">
+        <svg
+          viewBox="0 0 1200 40"
+          className="w-full h-8 text-background"
+          fill="currentColor"
+          preserveAspectRatio="none"
+        >
           <path d="M0,40 C300,0 900,0 1200,40 L1200,0 L0,0 Z" />
         </svg>
       </div>
@@ -16,7 +24,11 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-5">
-              <img src="/panda.jpg" alt="RidePanda" className="h-9 w-9 rounded-lg object-cover" />
+              <img
+                src="/panda.jpg"
+                alt="RidePanda"
+                className="h-9 w-9 rounded-lg object-cover"
+              />
               <span className="text-xl font-bold tracking-tight">
                 <span className="gradient-text">Ride</span>
                 <span className="text-foreground">Panda</span>
@@ -53,41 +65,93 @@ export default function Footer() {
 
           {/* Product */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wide uppercase text-foreground mb-4">Product</h3>
+            <h3 className="text-sm font-semibold tracking-wide uppercase text-foreground mb-4">
+              Product
+            </h3>
             <div className="space-y-3">
-              <Link to="/features" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Features</Link>
-              <Link to="/about" className="block text-sm text-muted-foreground hover:text-primary transition-colors">How It Works</Link>
-              <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Pricing</a>
-              <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">API Docs</a>
+              <Link
+                to="/features"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Features
+              </Link>
+              <Link
+                to="/about"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                How It Works
+              </Link>
+              <a
+                href="#"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Pricing
+              </a>
+              <a
+                href="#"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                API Docs
+              </a>
             </div>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wide uppercase text-foreground mb-4">Company</h3>
+            <h3 className="text-sm font-semibold tracking-wide uppercase text-foreground mb-4">
+              Company
+            </h3>
             <div className="space-y-3">
-              <Link to="/about" className="block text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link>
-              <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Careers</a>
-              <Link to="/contact" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link>
-              <a href="#" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Blog</a>
+              <Link
+                to="/about"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                About Us
+              </Link>
+              <a
+                href="#"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Careers
+              </a>
+              <Link
+                to="/contact"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Contact
+              </Link>
+              <a
+                href="#"
+                className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Blog
+              </a>
             </div>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wide uppercase text-foreground mb-4">Get in Touch</h3>
+            <h3 className="text-sm font-semibold tracking-wide uppercase text-foreground mb-4">
+              Get in Touch
+            </h3>
             <div className="space-y-3">
-              <a href="mailto:hello@ridepanda.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="mailto:hello@ridepanda.com"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                hello@ridepanda.com
+                ceo@ridepanda.app
               </a>
-              <a href="tel:+15551234567" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a
+                href="tel:+15551234567"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                +1 (555) 123-4567
+                +8801710930665
               </a>
               <div className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 flex-shrink-0 mt-0.5" />
-                <span>San Francisco, CA 94105</span>
+                <span>Dhaka, Bangladesh 1205</span>
               </div>
             </div>
           </div>
@@ -99,9 +163,24 @@ export default function Footer() {
             © {new Date().getFullYear()} RidePanda Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <a href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">Cookie Policy</a>
+            <a
+              href="#"
+              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="#"
+              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="#"
+              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              Cookie Policy
+            </a>
           </div>
         </div>
       </div>

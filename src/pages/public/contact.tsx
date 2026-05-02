@@ -2,7 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Sparkles, MessageSquare, Clock, ArrowRight } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Sparkles,
+  MessageSquare,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import { toast } from "sonner";
@@ -38,7 +47,10 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* ─── Hero ─── */}
-      <section className="relative py-28 hero-gradient overflow-hidden" id="contact-hero">
+      <section
+        className="relative py-28 hero-gradient overflow-hidden"
+        id="contact-hero"
+      >
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 right-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-60 h-60 bg-secondary/5 rounded-full blur-3xl" />
@@ -78,7 +90,7 @@ const ContactPage = () => {
                   {
                     icon: Mail,
                     title: "Email",
-                    detail: "hello@ridepanda.com",
+                    detail: "ceo@ridepanda.app",
                     sub: "We reply within 24 hours",
                     color: "text-cyan-500",
                     bg: "from-cyan-500/10 to-blue-500/10",
@@ -86,7 +98,7 @@ const ContactPage = () => {
                   {
                     icon: Phone,
                     title: "Phone",
-                    detail: "+1 (555) 123-4567",
+                    detail: "+8801710930665",
                     sub: "Mon–Fri, 9am–6pm EST",
                     color: "text-violet-500",
                     bg: "from-violet-500/10 to-purple-500/10",
@@ -95,7 +107,7 @@ const ContactPage = () => {
                     icon: MapPin,
                     title: "Office",
                     detail: "123 Tech Street",
-                    sub: "San Francisco, CA 94105",
+                    sub: "Dhaka, Bangladesh 1205",
                     color: "text-emerald-500",
                     bg: "from-emerald-500/10 to-green-500/10",
                   },
@@ -113,13 +125,17 @@ const ContactPage = () => {
                     className="premium-card rounded-xl p-4 bg-card border border-border flex items-start gap-4 group"
                     id={`contact-info-${i}`}
                   >
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${item.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <item.icon className={`h-5 w-5 ${item.color}`} />
                     </div>
                     <div>
                       <p className="text-sm font-semibold">{item.title}</p>
                       <p className="text-sm text-foreground">{item.detail}</p>
-                      <p className="text-xs text-muted-foreground">{item.sub}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {item.sub}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -127,16 +143,26 @@ const ContactPage = () => {
             </div>
 
             {/* Right - Contact Form */}
-            <div className="lg:col-span-3">
-              <div className="premium-card rounded-2xl p-8 bg-card border border-border" id="contact-form-card">
-                <h3 className="text-lg font-semibold mb-1">Send us a message</h3>
-                <p className="text-sm text-muted-foreground mb-6">
+            <div className="lg:col-span-3 xl:mt-30">
+              <div
+                className="premium-card rounded-2xl p-5 bg-card border border-border"
+                id="contact-form-card"
+              >
+                <h3 className="text-lg font-semibold mb-1">
+                  Send us a message
+                </h3>
+                <p className="text-sm text-muted-foreground mb-3">
                   Fill out the form below and we'll be in touch shortly.
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-name" className="text-sm font-medium">Full Name *</Label>
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="space-y-1">
+                      <Label
+                        htmlFor="contact-name"
+                        className="text-sm font-medium"
+                      >
+                        Full Name *
+                      </Label>
                       <Input
                         id="contact-name"
                         name="name"
@@ -144,11 +170,16 @@ const ContactPage = () => {
                         onChange={handleChange}
                         required
                         placeholder="John Doe"
-                        className="rounded-lg h-11"
+                        className="rounded-lg h-10"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-email" className="text-sm font-medium">Email Address *</Label>
+                    <div className="space-y-1">
+                      <Label
+                        htmlFor="contact-email"
+                        className="text-sm font-medium"
+                      >
+                        Email Address *
+                      </Label>
                       <Input
                         id="contact-email"
                         name="email"
@@ -157,13 +188,18 @@ const ContactPage = () => {
                         onChange={handleChange}
                         required
                         placeholder="john@company.com"
-                        className="rounded-lg h-11"
+                        className="rounded-lg h-10"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="contact-subject" className="text-sm font-medium">Subject *</Label>
+                    <Label
+                      htmlFor="contact-subject"
+                      className="text-sm font-medium"
+                    >
+                      Subject *
+                    </Label>
                     <Input
                       id="contact-subject"
                       name="subject"
@@ -171,12 +207,17 @@ const ContactPage = () => {
                       onChange={handleChange}
                       required
                       placeholder="What's this about?"
-                      className="rounded-lg h-11"
+                      className="rounded-lg h-10"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="contact-message" className="text-sm font-medium">Message *</Label>
+                    <Label
+                      htmlFor="contact-message"
+                      className="text-sm font-medium"
+                    >
+                      Message *
+                    </Label>
                     <Textarea
                       id="contact-message"
                       name="message"
@@ -192,7 +233,7 @@ const ContactPage = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-xl bg-gradient-to-r from-primary to-cyan-500 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 h-12"
+                    className="w-full rounded-xl bg-gradient-to-r from-primary to-cyan-500 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300 h-10"
                     id="contact-submit-btn"
                   >
                     {isSubmitting ? (
@@ -256,7 +297,9 @@ const ContactPage = () => {
                 id={`faq-link-card-${i}`}
               >
                 <h3 className="text-base font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground mb-5">{item.desc}</p>
+                <p className="text-sm text-muted-foreground mb-5">
+                  {item.desc}
+                </p>
                 <Link to={item.link}>
                   <Button variant="outline" size="sm" className="rounded-lg">
                     {item.label}

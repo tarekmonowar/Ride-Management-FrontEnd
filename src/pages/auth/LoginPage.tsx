@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router";
-import { Car, Eye, EyeOff, Home, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,6 +7,9 @@ import {
   useLoginMutation,
   useUserInfoQuery,
 } from "@/redux/features/auth/auth.api";
+import { Eye, EyeOff, Home, Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const LoginPage = () => {
@@ -117,33 +117,32 @@ const LoginPage = () => {
     }));
   };
 
-  const demoAccounts = [
-    { role: "Rider", email: "rider@demo.com", password: "12345Ph@" },
-    { role: "Driver", email: "driver@demo.com", password: "12345Ph@" },
-    { role: "Admin", email: "admin@demo.com", password: "12345Ph@" },
-  ];
+  // const demoAccounts = [
+  //   { role: "Rider", email: "rider@demo.com", password: "12345Ph@" },
+  //   { role: "Driver", email: "driver@demo.com", password: "12345Ph@" },
+  //   { role: "Admin", email: "admin@demo.com", password: "12345Ph@" },
+  // ];
 
-  const fillDemoAccount = (email: string, password: string) => {
-    setFormData({ email, password });
-  };
+  // const fillDemoAccount = (email: string, password: string) => {
+  //   setFormData({ email, password });
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center space-x-2">
-            <Car className="h-10 w-10 text-white" />
-            <span className="text-3xl font-bold text-white">RideManager</span>
-          </Link>
-        </div>
 
         {/* Back to Home */}
         <div className="text-center mb-4">
+          {/* <div className="text-center mb-8">
+            <Link to="/">
+              <span className="text-3xl font-bold ">Home</span>
+            </Link>
+          </div> */}
           <Link to="/">
             <Button
               variant="outline"
-              className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white px-6 py-2 font-medium transition-all duration-300 hover:scale-105"
+              className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 hover:bg-white/20  px-6 py-2 font-medium transition-all duration-300 hover:scale-105"
             >
               <Home className="mr-2 h-4 w-4" />
               Back to Home
@@ -237,7 +236,7 @@ const LoginPage = () => {
         </Card>
 
         {/* Demo Accounts */}
-        <Card className="card-dashboard mt-6">
+        {/* <Card className="card-dashboard mt-6">
           <CardHeader>
             <CardTitle className="text-lg">Demo Accounts</CardTitle>
             <p className="text-sm text-muted-foreground">
@@ -262,7 +261,7 @@ const LoginPage = () => {
               ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );

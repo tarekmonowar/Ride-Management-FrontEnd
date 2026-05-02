@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router";
-import { Car, Eye, EyeOff, Home, Loader2, User, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner";
 import {
   useRegisterMutation,
   useUserInfoQuery,
 } from "@/redux/features/auth/auth.api";
+import { Eye, EyeOff, Home, Loader2, User, UserCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router";
+import { toast } from "sonner";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -95,9 +95,23 @@ const RegisterPage = () => {
 
     // Driver specific validation
     if (activeTab === "driver") {
-      const { vehicleType, vehicleMake, vehicleModel, vehicleColor, plateNumber, nidPhoto, drivingLicensePhoto } = formData;
+      const {
+        vehicleType,
+        vehicleMake,
+        vehicleModel,
+        vehicleColor,
+        plateNumber,
+        nidPhoto,
+        drivingLicensePhoto,
+      } = formData;
 
-      if (!vehicleType || !vehicleMake || !vehicleModel || !vehicleColor || !plateNumber) {
+      if (
+        !vehicleType ||
+        !vehicleMake ||
+        !vehicleModel ||
+        !vehicleColor ||
+        !plateNumber
+      ) {
         toast.error("Please fill in all vehicle information");
         return;
       }
@@ -201,7 +215,10 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: string,
+  ) => {
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -216,19 +233,13 @@ const RegisterPage = () => {
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center space-x-2">
-            <Car className="h-10 w-10 text-white" />
-            <span className="text-3xl font-bold text-white">RideManager</span>
-          </Link>
-        </div>
 
         {/* Back to Home */}
         <div className="text-center mb-4">
           <Link to="/">
             <Button
               variant="outline"
-              className="rounded-full bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white px-6 py-2 font-medium transition-all duration-300 hover:scale-105"
+              className="rounded-full bg-white/10 backdrop-blur-sm border-white/30  hover:bg-white/20 px-6 py-2 font-medium transition-all duration-300 hover:scale-105"
             >
               <Home className="mr-2 h-4 w-4" />
               Back to Home
@@ -365,7 +376,12 @@ const RegisterPage = () => {
                         id="vehicleType"
                         name="vehicleType"
                         value={formData.vehicleType}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, vehicleType: e.target.value as "bike" | "car" }))}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            vehicleType: e.target.value as "bike" | "car",
+                          }))
+                        }
                         className="w-full rounded border p-2 bg-white"
                         required={activeTab === "driver"}
                       >
@@ -432,21 +448,29 @@ const RegisterPage = () => {
                         required={activeTab === "driver"}
                       />
                       {formData.nidPhoto && (
-                        <p className="text-xs text-green-600 mt-1">NID photo uploaded</p>
+                        <p className="text-xs text-green-600 mt-1">
+                          NID photo uploaded
+                        </p>
                       )}
                     </div>
                     <div className="mt-4">
-                      <Label htmlFor="drivingLicensePhoto">Driving License Photo *</Label>
+                      <Label htmlFor="drivingLicensePhoto">
+                        Driving License Photo *
+                      </Label>
                       <Input
                         id="drivingLicensePhoto"
                         type="file"
                         accept="image/*"
-                        onChange={(e) => handleFileChange(e, "drivingLicensePhoto")}
+                        onChange={(e) =>
+                          handleFileChange(e, "drivingLicensePhoto")
+                        }
                         className="bg-white"
                         required={activeTab === "driver"}
                       />
                       {formData.drivingLicensePhoto && (
-                        <p className="text-xs text-green-600 mt-1">Driving license photo uploaded</p>
+                        <p className="text-xs text-green-600 mt-1">
+                          Driving license photo uploaded
+                        </p>
                       )}
                     </div>
                   </div>
