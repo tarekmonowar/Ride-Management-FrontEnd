@@ -1,5 +1,3 @@
-import wave from "@/assets/images/wave-2.svg";
-
 export default function HowItWorks() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
