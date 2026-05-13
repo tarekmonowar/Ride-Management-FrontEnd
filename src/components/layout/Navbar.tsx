@@ -32,9 +32,7 @@ export default function Navbar() {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `text-[0.9rem] font-medium transition-all duration-300 link-underline ${
-      isActive
-        ? "text-primary"
-        : "text-foreground/70 hover:text-foreground"
+      isActive ? "text-primary" : "text-foreground/70 hover:text-foreground"
     }`;
 
   const navLinks = [
@@ -58,7 +56,11 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group" id="brand-logo">
+            <Link
+              to="/"
+              className="flex items-center gap-2.5 group"
+              id="brand-logo"
+            >
               <div className="relative">
                 <img
                   src="/panda.jpg"
@@ -68,7 +70,7 @@ export default function Navbar() {
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
               </div>
               <span className="text-xl font-bold tracking-tight">
-                <span className="gradient-text">Ride</span>
+                <span className="text-primary">Ride</span>
                 <span className="text-foreground">Panda</span>
               </span>
             </Link>
@@ -184,7 +186,11 @@ export default function Navbar() {
               {user ? (
                 <div className="flex gap-2">
                   <Link to="/login">
-                    <Button variant="outline" size="sm" className="rounded-lg text-sm">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="rounded-lg text-sm"
+                    >
                       Dashboard
                     </Button>
                   </Link>
@@ -199,7 +205,11 @@ export default function Navbar() {
               ) : (
                 <div className="flex gap-2">
                   <Link to="/login">
-                    <Button variant="outline" size="sm" className="rounded-lg text-sm">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="rounded-lg text-sm"
+                    >
                       Log in
                     </Button>
                   </Link>
